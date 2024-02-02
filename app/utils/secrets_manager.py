@@ -1,9 +1,10 @@
 import boto3
 import base64
+from app.config.constants import AWS_REGION
 
 secrets_manager = boto3.client(
     service_name='secretsmanager',
-    region_name='us-east-2'
+    region_name=AWS_REGION
 )
 
 
