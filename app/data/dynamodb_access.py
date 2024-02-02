@@ -20,9 +20,11 @@ def create_table_item(data, encrypted_payload):
             'Data': {'B': encrypted_payload},
         }
 
-        dynamodb.put_item(TableName=table_name, Item=item)
+        condition = "attribute_not_exists(RecordID) AND attribute_not_exists(ItemType)"
+
+        dynamodb.put_item(TableName=table_name, Item=item, ConditionExpression=condition)
     except (BotoCoreError, ClientError) as e:
-        print("Failed to store item in DynamoDB: " + str(e))
+        raise Exception("Failed to store item in DynamoDB: " + str(e))
 
 
 def retrieve_item_by_id(item_id, item_type):
@@ -41,4 +43,4 @@ def retrieve_item_by_id(item_id, item_type):
         encrypted_data = item.get('Data', {}).get('B', b'')
         return encrypted_data
     except (BotoCoreError, ClientError) as e:
-        print("Failed to retrieve item from DynamoDB: " + str(e))
+        raise Exception("Failed to retrieve item from DynamoDB: " + str(e))

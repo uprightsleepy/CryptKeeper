@@ -31,7 +31,7 @@ def encrypt(data):
         return jsonify({'encrypted_data': encoded_encrypted_payload})
 
     except Exception as e:
-        return jsonify(error="Encryption failed: " + str(e)), 500
+        return jsonify(error=str(e)), 500
 
 
 def decrypt(data):
@@ -55,4 +55,4 @@ def decrypt(data):
 
         return unpadded_data.decode(ENCODING_STANDARD)
     except Exception as e:
-        return jsonify(error="Decryption failed: " + str(e)), 500
+        return jsonify(error=str(e)), 500
