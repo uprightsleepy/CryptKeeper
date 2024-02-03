@@ -1,3 +1,5 @@
+import os
+
 from flask import Blueprint, request, jsonify
 from werkzeug.utils import secure_filename
 from app.services.encryption_service import encrypt, decrypt, decrypt_data, encrypt_file
@@ -32,15 +34,10 @@ def encrypt_file_route():
     try:
         file = validate_and_get_file(request)
         filename = secure_filename(file.filename)
-
-        if filename.endswith('.txt'):
-            name, extension = filename.rsplit('.txt', 1)
-            encrypted_filename = f"{name}_encrypted_.txt"
-        else:
-            encrypted_filename = filename + '_encrypted_'
+        name, extension = os.path.splitext(filename)
+        encrypted_filename = f"{name}_encrypted_{extension}"
 
         file_content = file.read()
-
         password, salt = get_secrets()
         encrypted_content = encrypt_file(file_content, password, salt)
 
@@ -73,7 +70,8 @@ def decrypt_file_route():
         if '_encrypted_' in filename:
             decrypted_filename = filename.replace('_encrypted_', '')
         else:
-            return jsonify(error="File does not appear to be encrypted or does not follow the naming convention"), 400
+            return jsonify(error="File does not appear to be encrypted or "
+                                 "does not follow the approved naming convention."), 400
 
         file_content = file.read()
 
