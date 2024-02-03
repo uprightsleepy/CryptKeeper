@@ -3,7 +3,7 @@ import os
 from flask import Blueprint, request, jsonify
 from werkzeug.utils import secure_filename
 
-from app.data.s3_acces import upload_file, download_file, upload_bytes
+from app.data.s3_access import upload_file, download_file, upload_bytes
 from app.services.encryption_service import encrypt, decrypt, decrypt_data, encrypt_file
 from marshmallow import Schema, fields, ValidationError
 
