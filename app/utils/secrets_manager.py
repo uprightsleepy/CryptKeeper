@@ -1,6 +1,6 @@
 import boto3
 import base64
-from app.config.constants import AWS_REGION
+from app.config.constants import AWS_REGION, ENCRYPT_DECRYPT_PASSWORD_SECRET_NAME, ENCRYPT_DECRYPT_SALT_SECRET_NAME
 
 secrets_manager = boto3.client(
     service_name='secretsmanager',
@@ -21,3 +21,9 @@ def get_secret(secret_name):
         else:
             decoded_binary_secret = base64.b64decode(get_secret_value_response['SecretBinary'])
             return decoded_binary_secret
+
+
+def get_secrets():
+    password = get_secret(ENCRYPT_DECRYPT_PASSWORD_SECRET_NAME)
+    salt = get_secret(ENCRYPT_DECRYPT_SALT_SECRET_NAME)
+    return password, salt
