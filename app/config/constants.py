@@ -3,6 +3,7 @@ AWS_REGION = 'us-east-2'
 
 # DynamoDB Configuration
 DYNAMODB_TABLE_NAME = 'EncryptionDataTable'
+S3_BUCKET_NAME = 'encrypt-decrypt-bucket'
 
 # Secret Keys
 ENCRYPT_DECRYPT_PASSWORD_SECRET_NAME = 'encrypt_decrypt_password'
