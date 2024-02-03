@@ -55,7 +55,7 @@
 						{
 							"key": "file",
 							"type": "file",
-							"src": "/D:/Development/Crypto Service/hello_world.txt"
+							"src": []
 						}
 					]
 				},
@@ -118,7 +118,7 @@
 						{
 							"key": "file",
 							"type": "file",
-							"src": "/D:/Development/Crypto Service/hello_world_encrypted_.txt"
+							"src": []
 						}
 					]
 				},
