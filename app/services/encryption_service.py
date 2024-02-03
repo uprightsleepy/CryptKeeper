@@ -20,6 +20,15 @@ def encrypt_data(plaintext, password, salt):
     return iv + ciphered_data
 
 
+def encrypt_file(plaintext_bytes, password, salt):
+    key = derive_key(password, salt)
+    cipher = AES.new(key, AES.MODE_CBC)
+    padded_plaintext = pad(plaintext_bytes, AES.block_size)
+    ciphered_data = cipher.encrypt(padded_plaintext)
+    iv = cipher.iv
+    return iv + ciphered_data
+
+
 def encrypt(data):
     try:
         plaintext = data.get('plaintext')
