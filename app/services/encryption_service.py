@@ -3,7 +3,6 @@ from base64 import b64encode
 from Crypto.Cipher import AES
 from Crypto.Protocol.KDF import PBKDF2
 from Crypto.Util.Padding import pad, unpad
-
 from flask import jsonify
 
 from app.config.constants import ENCODING_STANDARD

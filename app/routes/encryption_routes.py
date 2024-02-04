@@ -84,7 +84,7 @@ def decrypt_file_route():
 
         password, salt = get_secrets()
 
-        encrypted_content = download_file(ENCRYPT_S3_BUCKET_NAME, secure_file_name)
+        encrypted_content = download_file(DECRYPT_S3_BUCKET_NAME, secure_file_name)
 
         if encrypted_content is None:
             return jsonify(error="Failed to download file."), 500

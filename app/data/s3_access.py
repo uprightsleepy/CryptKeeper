@@ -37,6 +37,14 @@ def download_file(bucket_name, object_name):
     try:
         response = s3.get_object(Bucket=bucket_name, Key=full_object_name)
         return response['Body'].read()
-    except (BotoCoreError, ClientError) as e:
-        print(f"Failed to download {full_object_name} from {bucket_name}: {e}")
+    except ClientError as e:
+        error_code = e.response['Error']['Code']
+        if error_code == 'NoSuchKey':
+            raise FileNotFoundError(f"The object {full_object_name} does not exist in bucket {bucket_name}.") from e
+        else:
+            print(f"Failed to download {full_object_name} from {bucket_name}: {e}")
+            return None
+    except BotoCoreError as e:
+        print(f"An error occurred: {e}")
         return None
+
