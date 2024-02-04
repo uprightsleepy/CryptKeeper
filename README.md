@@ -1,63 +1,57 @@
 # CryptKeeper
 
-CryptKeeper is a secure data storage application that provides robust AES encryption for sensitive information before safely storing it in an AWS DynamoDB table. Designed to ensure data privacy and integrity, CryptKeeper uniquely stores each piece of data to prevent overwriting, making it an ideal solution for managing encrypted payloads. Additionally, it integrates with AWS S3 for encrypted file storage, further enhancing its capability to secure various data types.
+CryptKeeper is an advanced data encryption and secure storage solution that leverages AES encryption to protect sensitive information. It seamlessly integrates with AWS DynamoDB and S3 for robust storage capabilities, and employs AWS Lambda for automated file processing, ensuring data privacy, integrity, and efficient management of different data types.
 
 ## Features
 
-- **Secure Encryption**: Utilizes AES encryption to securely encrypt both textual data and files before storage.
-- **DynamoDB Integration**: Seamlessly stores encrypted textual data in DynamoDB with unique keys to prevent data overwriting.
-- **S3 Integration**: Efficiently manages encrypted file storage in an S3 bucket, allowing for secure file uploads and downloads.
-- **High Data Integrity**: Ensures that each piece of data, whether text or file, is stored uniquely, maintaining the highest levels of data integrity and security.
-- **AWS Secrets Manager Integration**: Leverages AWS Secrets Manager for secure management of encryption keys and salts, ensuring that encryption practices meet best security standards.
+- **AES Encryption**: Implements top-tier AES encryption for text and file data, securing it before storage.
+- **DynamoDB Integration**: Securely stores encrypted text data in DynamoDB, using unique keys for each item to avoid data overwriting and ensure integrity.
+- **S3 and Lambda Integration**: Manages encrypted file storage in S3 buckets, with Lambda functions automating the file processing workflow for secure uploads, transitions, and downloads.
+- **AWS Secrets Manager**: Utilizes AWS Secrets Manager for the secure handling of encryption keys and salts, maintaining adherence to the highest security standards.
+- **Enhanced Data Security**: Ensures the highest levels of security and integrity for all stored data, backed by AWS’s reliable infrastructure.
 
 ### Prerequisites
 
-- AWS Account
+- An active AWS Account
 - Python 3.x
-- Boto3 Library
-- Access to AWS DynamoDB and necessary permissions
-- Access to AWS S3 and necessary permissions
+- Boto3 and other necessary Python libraries
+- Properly configured access to AWS DynamoDB, S3, and Lambda with appropriate permissions
 - AWS Secrets Manager for managing encryption secrets
 
 ## Installation
 
-1. **Clone the repository**:
-
+1. **Clone the Repository**:
     ```bash
     git clone https://github.com/yourrepository/cryptkeeper.git
     cd cryptkeeper
     ```
 
-2. **Install dependencies**:
-
+2. **Install Dependencies**:
     ```bash
     pip install -r requirements.txt
     ```
-
-   This will install all necessary Python libraries, including Flask, Boto3, and PyCryptodome.
+   This will install Flask, Boto3, PyCryptodome, and other required libraries.
 
 3. **Configure AWS Credentials**:
+   Setup your AWS credentials for programmatic access via the AWS CLI (`aws configure`) or by setting environment variables.
 
-   Ensure your AWS credentials are set up correctly. These can be configured using the AWS CLI with `aws configure` or by setting environment variables.
-
-4. **Set Environment Variables**:
-
-   Make sure to set up the following environment variables according to your AWS setup:
-    - `AWS_REGION`: Your AWS region.
-    - `DYNAMODB_TABLE_NAME`: The name of your DynamoDB table for storing encrypted data.
-    - `S3_BUCKET_NAME`: The name of your S3 bucket for storing encrypted files.
-    - Secrets for encryption/decryption stored in AWS Secrets Manager.
+4. **Environment Variable Setup**:
+   Configure the following environment variables according to your AWS setup:
+   - `AWS_REGION`: The AWS region of operation.
+   - `DYNAMODB_TABLE_NAME`: The name of your DynamoDB table for encrypted text storage.
+   - `S3_BUCKET_NAME`: The name of your S3 bucket for encrypted file storage.
+   - Encryption keys and salts managed through AWS Secrets Manager.
 
 ## Usage
 
-The application exposes a Flask-based web API with endpoints for encrypting and decrypting data, as well as uploading and downloading encrypted files. Here are some key endpoints:
+CryptKeeper offers a Flask-based API for encryption and decryption operations, including file handling:
+- **Encrypt Text**: `POST /encrypt` with the plaintext data.
+- **Decrypt Text**: `POST /decrypt` with the id of the encrypted data.
+- **Upload Encrypted File**: `POST /encrypt-file` for file encryption and subsequent upload.
+- **Download Decrypted File**: `POST /decrypt-file` for downloading and decrypting files.
 
-- **Encrypt Text**: `POST /encrypt` with JSON containing the data to encrypt.
-- **Decrypt Text**: `POST /decrypt` with JSON specifying the data to decrypt.
-- **Upload Encrypted File**: `POST /encrypt-file` with the file to be encrypted and uploaded.
-- **Download Decrypted File**: `POST /decrypt-file` with the filename to decrypt and download.
-
-For detailed API usage, please refer to the included Postman collection or Swagger documentation.
+For detailed API usage, refer to the included Postman collection or Swagger documentation.
 
 ## Contact
+
 For support or inquiries, please contact [Henry Phillips](mailto:henry@designedbyhenryp.com).
